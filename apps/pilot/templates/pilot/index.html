@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flight Time Caluculator</title>
+    
+    {% load staticfiles %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
+    <link rel= "stylesheet" href= "{% static 'pilot/css/style.css' %}">
+    <script type="text/javascript" src="{% static 'pilot/js/jquery.js' %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+    <div class="row">
+        <h4>Flight Time and Distance Caluculator</h4>
+        <div class="col l12 card-panel teal lighten-2">
+            <div class="row">
+                <form action="/calculate" method="POST">
+                    {% csrf_token %}
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">cloud</i>
+                        <select name="wind">
+                            <option value="yes" selected>Live Winds</option>
+                            <option value="no">No Wind</option>
+                        </select>
+                        <label>Wind</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">airplanemode_active</i>
+                        <input id="speed" type="number" name="speed">
+                        <label for="speed">Cruise Speed</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">flight_takeoff</i>
+                        <input id="departing_airport" type="text" name="departing">
+                        <label for="departing_airport">Departing Airport</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">flight_land</i>
+                        <input id="arriving_airport" type="text" name="arriving">
+                        <label for="arriving_airport">Arriving Airport</label>
+                    </div>
+                    <a class="waves-effect waves-light btn cyan darken-4"><i class="material-icons right">public</i>
+                        <input type="submit" value="Calculate" id="public">
+                    </a>
+                    <h5>* if not specified speed will be 140kts *</h5>
+                </form>
+            </div>
+        </div>
+        <div class="col l6 card-panel teal lighten-2">
+            <div id="tall">
+                {% if content %}
+                    <h3>{{ depart }} ---> {{ arrive }}</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col l6 card-panel teal lighten-2">
+            <div id="map">
+                {% load static %}
+                <img src="{% static 'images/GoogleMapTA.jpg' %}" alt="map">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

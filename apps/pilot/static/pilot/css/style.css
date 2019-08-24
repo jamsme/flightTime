@@ -1,0 +1,62 @@
+body {
+    width: 1300px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px #000;
+    padding: 20px;
+    background-color: #006064; 
+}
+#map {
+    width: 100%;
+    height: 400px;
+    /* border: 1px solid black; */
+    margin: 10px 0 10px 0;
+}
+div.col.l12.card-panel {
+    padding: 15px 20px 0 20px;
+    color: white;
+}
+a.waves-effect.waves-light.btn {
+    margin-left: 55px;
+}
+input#public {
+    color: #fff;
+}
+h4 {
+    margin: 5px 0 30px 0;
+    font-family: Helvetica;
+    font-weight: 100;
+    text-align: center;
+    color: white;
+}
+.input-field .prefix.active, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label {
+    color: #006064;
+}
+.input-field>label, label{
+    color: white;
+}
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid white; 
+}
+input[type=number]:not(.browser-default), input[type=text]:not(.browser-default) {
+    border-bottom: 1px solid white;
+    color: white;
+}
+input[type=number]:not(.browser-default):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #006064;
+    box-shadow: 0 1px 0 0 #006064;
+}
+#tall {
+    width: 100%;
+    height: 400px;
+    margin: 10px 0 10px 0;
+}
+h5 {
+    font-size: 10px;
+    display: inline-block;
+    margin-left: 175px;
+}
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
