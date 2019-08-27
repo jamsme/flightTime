@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <title>Flight Time Caluculator</title>
     
     {% load staticfiles %}
@@ -13,6 +12,7 @@
     <link rel= "stylesheet" href= "{% static 'pilot/css/style.css' %}">
     <script type="text/javascript" src="{% static 'pilot/js/jquery.js' %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrrMT_YfD6nyMB34nZaIggYUH2LdJI_M&callback=initMap"></script>
 
 </head>
 <body>
@@ -37,13 +37,23 @@
                     </div>
                     <div class="input-field col s3">
                         <i class="material-icons prefix">flight_takeoff</i>
-                        <input id="departing_airport" type="text" name="departing">
+                        <input id="departing_airport" type="text" placeholder="ONT" name="departing">
                         <label for="departing_airport">Departing Airport</label>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="input-field col s3">
                         <i class="material-icons prefix">flight_land</i>
-                        <input id="arriving_airport" type="text" name="arriving">
+                        <input id="arriving_airport" type="text" placeholder="OAK" name="arriving">
                         <label for="arriving_airport">Arriving Airport</label>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <a class="waves-effect waves-light btn cyan darken-4"><i class="material-icons right">public</i>
                         <input type="submit" value="Calculate" id="public">
@@ -54,16 +64,30 @@
         </div>
         <div class="col l6 card-panel teal lighten-2">
             <div id="tall">
-                {% if content %}
-                    <h3>{{ depart }} ---> {{ arrive }}</h3>
+                {% if "wind" and "speed" and "arrive" and "depart" in request.session %}
+                    <h4 class="bold">{{ request.session.depart }} <i class="material-icons prefix">forward</i> {{ request.session.arrive }}</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col l6">
+                            <h4 class="result">Time Difference</h4>
+                            <h6>Nothing</h6>
+                            <h4 class="result">Distance</h4>
+                            <h6>Nothing</h6>
+                            <h4 class="result">Heading</h4>
+                            <h6>Nothing</h6>
+                        </div>
+                        <div class="col l6">
+                            <h4 class="result">Flight Time</h4>
+                            <h6>Nothing</h6>
+                            <h4 class="result">Speed</h4>
+                            <h6>{{ request.session.speed }}</h6>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         </div>
         <div class="col l6 card-panel teal lighten-2">
-            <div id="map">
-                {% load static %}
-                <img src="{% static 'images/GoogleMapTA.jpg' %}" alt="map">
-            </div>
+            <div id="map"></div>
         </div>
     </div>
 </body>
