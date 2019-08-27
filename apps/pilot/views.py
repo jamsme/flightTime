@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 def index(request):
     return render(request, "pilot/index.html")
@@ -8,17 +9,29 @@ def calculate(request):
 
     if request.method == 'POST':
 
-        wind = p['wind']
-        speed = p['speed']
-        depart = p['departing']
-        arrive = p['arriving']
-        
-        if speed == '':
-            speed = 140
+        if p['departing'] == '':
+            messages.error(request, 'Empty')
+            return redirect("/")
+        elif p['arriving'] == '':
+            messages.error(request, 'Empty')
+            return redirect("/")
 
-        print(wind)
-        print(speed)
-        print(depart)
-        print(arrive)
+        else:
+            wind = p['wind']
+            speed = p['speed']
+            depart = p['departing']
+            arrive = p['arriving']
+            distance = 0
+            time = 0
 
-        return redirect("/")
+            departs = depart.upper()
+            arrives = arrive.upper()
+            if speed == '':
+                speed = 140
+                
+            request.session["wind"] = wind
+            request.session["speed"] = speed
+            request.session["depart"] = departs
+            request.session["arrive"] = arrives
+            
+            return redirect("/")
