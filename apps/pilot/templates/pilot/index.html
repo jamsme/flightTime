@@ -12,7 +12,7 @@
     <link rel= "stylesheet" href= "{% static 'pilot/css/style.css' %}">
     <script type="text/javascript" src="{% static 'pilot/js/jquery.js' %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrrMT_YfD6nyMB34nZaIggYUH2LdJI_M&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxNjU1jRQDgyze2eCt95yefLLyNPhU5yM&libraries=places&callback=initMap" async defer></script>
 
 </head>
 <body>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="input-field col s3">
                         <i class="material-icons prefix">flight_takeoff</i>
-                        <input id="departing_airport" type="text" placeholder="ONT" name="departing">
+                        <input id="departing_airport" type="text" placeholder="IATA" name="departing">
                         <label for="departing_airport">Departing Airport</label>
                         {% if messages %}
                             {% for message in messages %}
@@ -47,7 +47,7 @@
                     </div>
                     <div class="input-field col s3">
                         <i class="material-icons prefix">flight_land</i>
-                        <input id="arriving_airport" type="text" placeholder="OAK" name="arriving">
+                        <input id="arriving_airport" type="text" name="arriving">
                         <label for="arriving_airport">Arriving Airport</label>
                         {% if messages %}
                             {% for message in messages %}
@@ -91,4 +91,8 @@
         </div>
     </div>
 </body>
+<script>
+    var depart = "{{ request.session.depart }}";
+    var arrive = "{{ request.session.arrive }}";
+</script>
 </html>
