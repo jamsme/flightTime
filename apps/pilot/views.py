@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 def index(request):
+    if "wind" and "speed" and "arrive" and "depart" in request.session: 
+        print(request.session['wind'])
+        print(request.session['speed'])
+        print(request.session['depart'])
+        print(request.session['arrive'])
+        
     return render(request, "pilot/index.html")
 
 def calculate(request):
@@ -21,8 +27,6 @@ def calculate(request):
             speed = p['speed']
             depart = p['departing']
             arrive = p['arriving']
-            distance = 0
-            time = 0
 
             departs = depart.upper()
             arrives = arrive.upper()

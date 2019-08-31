@@ -63,6 +63,14 @@ h4.bold {
     color: #fff;
     margin: 0 0 10px 0;
 }
+input#heading, input#distance {
+    border: none;
+    text-align: center;
+    margin: 0;
+    font-size: 21px;
+    font-style: italic;
+    color: black;
+}
 hr {
     margin: 20px;
 }

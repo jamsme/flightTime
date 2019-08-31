@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
     <link rel= "stylesheet" href= "{% static 'pilot/css/style.css' %}">
-    <script type="text/javascript" src="{% static 'pilot/js/jquery.js' %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxNjU1jRQDgyze2eCt95yefLLyNPhU5yM&libraries=places&callback=initMap" async defer></script>
-
+    <script type="text/javascript" src="{% static 'pilot/js/jquery.js' %}"></script>
+    <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCxNjU1jRQDgyze2eCt95yefLLyNPhU5yM&libraries=geometry,places&callback=initMap"></script>
 </head>
 <body>
     <div class="row">
@@ -72,9 +71,9 @@
                             <h4 class="result">Time Difference</h4>
                             <h6>Nothing</h6>
                             <h4 class="result">Distance</h4>
-                            <h6>Nothing</h6>
+                            <h6><input type="text" readonly id="distance"></h6>
                             <h4 class="result">Heading</h4>
-                            <h6>Nothing</h6>
+                            <h6><input type="text" readonly id="heading"></h6>
                         </div>
                         <div class="col l6">
                             <h4 class="result">Flight Time</h4>
@@ -94,5 +93,5 @@
 <script>
     var depart = "{{ request.session.depart }}";
     var arrive = "{{ request.session.arrive }}";
-</script>
+    </script>
 </html>
