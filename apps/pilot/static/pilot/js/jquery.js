@@ -35,14 +35,12 @@ $(document).ready(function () {
         service.findPlaceFromQuery(request, function (results) {
             marker1 = new google.maps.Marker({
                 map: map,
-                draggable: true,
                 position: results[0].geometry.location
             });
 
             serviceTwo.findPlaceFromQuery(requestTwo, function (results) {
                 marker2 = new google.maps.Marker({
                     map: map,
-                    draggable: true,
                     position: results[0].geometry.location
                 });
 
@@ -67,11 +65,17 @@ $(document).ready(function () {
         var path = [marker1.getPosition(), marker2.getPosition()];
         poly.setPath(path);
         var heading = google.maps.geometry.spherical.computeHeading(path[0], path[1]);
-        var finaleHeading = Math.round(heading);
+        console.log(heading);
+        if (heading < 0) {
+            heading = heading + 360;
+            heading
+            console.log(heading);
+        }
+        finaleHeading = Math.round(heading) + "°";
         document.getElementById('heading').value = finaleHeading;
         var d = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
         var x = d / 1852;
-        var finaleDistance = Math.round(x);
+        var finaleDistance = Math.round(x) + "nm";
         document.getElementById('distance').value = finaleDistance;
       };
       
