@@ -16,8 +16,8 @@
 </head>
 <body>
     <div class="row">
-        <h4>Flight Time and Distance Caluculator</h4>
-        <div class="col l12 card-panel teal lighten-2">
+        <!-- <h4>Flight Time and Distance Caluculator</h4> -->
+        <div class="col l12 card-panel blue-grey darken-3">
             <div class="row">
                 <form action="/calculate" method="POST">
                     {% csrf_token %}
@@ -54,14 +54,14 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                    <a class="waves-effect waves-light btn cyan darken-4"><i class="material-icons right">public</i>
+                    <a class="waves-effect waves-light btn pink lighten-2"><i class="material-icons right">public</i>
                         <input type="submit" value="Calculate" id="public">
                     </a>
                     <h5>* if not specified speed will be 140kts *</h5>
                 </form>
             </div>
         </div>
-        <div class="col l6 card-panel teal lighten-2">
+        <div class="col l6 card-panel blue-grey darken-3">
             <div id="tall">
                 {% if "wind" and "speed" and "arrive" and "depart" in request.session %}
                     <h4 class="bold">{{ request.session.depart }} <i class="material-icons prefix">forward</i> {{ request.session.arrive }}</h4>
@@ -85,7 +85,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col l6 card-panel teal lighten-2">
+        <div class="col l6 card-panel blue-grey darken-3">
             <div id="map"></div>
         </div>
     </div>
@@ -93,5 +93,5 @@
 <script>
     var depart = "{{ request.session.depart }}";
     var arrive = "{{ request.session.arrive }}";
-    </script>
+</script>
 </html>

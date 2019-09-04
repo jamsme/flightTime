@@ -65,11 +65,9 @@ $(document).ready(function () {
         var path = [marker1.getPosition(), marker2.getPosition()];
         poly.setPath(path);
         var heading = google.maps.geometry.spherical.computeHeading(path[0], path[1]);
-        console.log(heading);
         if (heading < 0) {
             heading = heading + 360;
             heading
-            console.log(heading);
         }
         finaleHeading = Math.round(heading) + "°";
         document.getElementById('heading').value = finaleHeading;
