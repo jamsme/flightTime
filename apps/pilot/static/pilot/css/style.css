@@ -2,7 +2,7 @@ body {
     width: 1300px;
     margin: 40px auto;
     padding: 0 20px;
-    background-color: #607D8B;
+    background-color: #263238;
 }
 #tall {
     width: 100%;
@@ -31,29 +31,29 @@ h4 {
     font-family: Helvetica;
     font-weight: 100;
     text-align: center;
-    color: white;
+    color: black;
 }
 .input-field .prefix.active, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label {
-    color: #f06292;
+    color: #004d40;
 }
 .dropdown-content li>span {
-    color: white;
-    background-color: #f06292;
+    color: black;
+    background-color: #004d40;
     margin: 2px 0 2px 0;
 }
 .input-field>label, label{
-    color: white;
+    color: black;
 }
 .select-wrapper input.select-dropdown:focus {
-    border-bottom: 1px solid white; 
+    border-bottom: 1px solid black; 
 }
 input[type=number]:not(.browser-default), input[type=text]:not(.browser-default) {
-    border-bottom: 1px solid white;
-    color: white;
+    border-bottom: 1px solid black;
+    color: black;
 }
 input[type=number]:not(.browser-default):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 1px solid #f06292;
-    box-shadow: 0 1px 0 0 #f06292;
+    border-bottom: 1px solid #004d40;
+    box-shadow: 0 1px 0 0 #004d40;
 }
 h5 {
     font-size: 10px;
@@ -67,7 +67,7 @@ img {
 }
 h4.bold {
     font-weight: 600;
-    color: #fff;
+    color: black;
     margin: 0 0 10px 0;
 }
 input#heading, input#distance {
@@ -76,7 +76,7 @@ input#heading, input#distance {
     margin: 0;
     font-size: 21px;
     font-style: italic;
-    color: black;
+    color: darkred;
 }
 hr {
     margin: 20px;
@@ -97,9 +97,10 @@ h6 {
     margin: 10px 0 30px 0;
     font-size: 21px;
     font-style: italic;
+    color: darkred;
 }
 hr {
     margin: 10px auto 20px auto;
     width: 550px;
-    border: .5px solid #fff;
+    border: .5px solid black;
 }

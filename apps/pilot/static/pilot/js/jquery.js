@@ -49,7 +49,6 @@ $(document).ready(function () {
                 map.fitBounds(bounds);
 
                 update();
-                console.log(wind);
                 if (wind == "yes") {
                     getWeather(getLatLng(marker1)[0], getLatLng(marker1)[1]);
                 };
@@ -62,29 +61,6 @@ $(document).ready(function () {
             strokeWeight: 3,
             map: map,
         });
-    };
-
-    function getWeather(x,y) {
-        var request = new XMLHttpRequest()
-        request.open('GET', `http://api.openweathermap.org/data/2.5/weather?lat=${x}&lon=${y}&appid=6f2782e4e065a6d3e06dbbbc35e40240`, true);
-        request.onload = function () {
-            var data = JSON.parse(this.response)
-            if (request.status >= 200 && request.status < 400) {
-                console.log("got data");
-              } else {
-                console.log('error')
-            }
-        }
-        request.send()
-    };
-
-    function getLatLng(x) {
-        var mark1 = String(x.getPosition());
-        var remove = mark1.replace("(","");
-        var remove2 = remove.replace(")","");
-        var split = remove2.split(",");
-        var latLng = [Number(split[0]), Number(split[1])];
-        return latLng;
     };
 
     function update() {
@@ -102,5 +78,28 @@ $(document).ready(function () {
         var finaleDistance = Math.round(x) + "nm";
         document.getElementById('distance').value = finaleDistance;
       };
-      
+
+    function getWeather(x,y) {
+        var request = new XMLHttpRequest()
+        request.open('GET', `http://api.openweathermap.org/data/2.5/weather?lat=${x}&lon=${y}&appid=6f2782e4e065a6d3e06dbbbc35e40240`, true);
+        request.onload = function () {
+            var data = JSON.parse(this.response)
+            if (request.status >= 200 && request.status < 400) {
+                console.log(data);
+              } else {
+                console.log('error')
+            }
+        }
+        request.send()
+    };
+
+    function getLatLng(x) {
+        var mark1 = String(x.getPosition());
+        var remove = mark1.replace("(","");
+        var remove2 = remove.replace(")","");
+        var split = remove2.split(",");
+        var latLng = [Number(split[0]), Number(split[1])];
+        return latLng;
+    };
+
 });
