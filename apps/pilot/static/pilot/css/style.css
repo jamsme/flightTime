@@ -31,29 +31,27 @@ h4 {
     font-family: Helvetica;
     font-weight: 100;
     text-align: center;
-    color: black;
 }
 .input-field .prefix.active, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label {
-    color: #004d40;
+    color: #607d8b;
 }
 .dropdown-content li>span {
-    color: black;
-    background-color: #004d40;
+    color: white;
+    background-color: #607d8b;
     margin: 2px 0 2px 0;
 }
 .input-field>label, label{
     color: black;
 }
 .select-wrapper input.select-dropdown:focus {
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid #607d8b; 
 }
 input[type=number]:not(.browser-default), input[type=text]:not(.browser-default) {
     border-bottom: 1px solid black;
-    color: black;
 }
 input[type=number]:not(.browser-default):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 1px solid #004d40;
-    box-shadow: 0 1px 0 0 #004d40;
+    border-bottom: 1px solid #607d8b;
+    box-shadow: 0 1px 0 0 #607d8b;
 }
 h5 {
     font-size: 10px;
@@ -103,4 +101,6 @@ hr {
     margin: 10px auto 20px auto;
     width: 550px;
     border: .5px solid black;
+} ::placeholder {
+    color: black;
 }
