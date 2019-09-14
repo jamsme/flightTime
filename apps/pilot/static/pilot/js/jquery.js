@@ -46,11 +46,14 @@ $(document).ready(function () {
 
                 var bounds = new google.maps.LatLngBounds(
                     marker1.position, marker2.position);
-                map.fitBounds(bounds);
+                    map.fitBounds(bounds);
 
                 update();
                 if (wind == "yes") {
                     getWeather(getLatLng(marker1)[0], getLatLng(marker1)[1]);
+                } else {
+                    eta(speed);
+                    convertToHourMin(eta(speed));
                 };
             });
         });
@@ -63,6 +66,8 @@ $(document).ready(function () {
         });
     };
 
+    var divide = Number; // Globally scoping "x"
+
     function update() {
         var path = [marker1.getPosition(), marker2.getPosition()];
         poly.setPath(path);
@@ -74,8 +79,8 @@ $(document).ready(function () {
         finaleHeading = Math.round(heading) + "°";
         document.getElementById('heading').value = finaleHeading;
         var d = google.maps.geometry.spherical.computeDistanceBetween(path[0], path[1]);
-        var x = d / 1852;
-        var finaleDistance = Math.round(x) + "nm";
+        divide = d / 1852;
+        var finaleDistance = Math.round(divide) + "nm";
         document.getElementById('distance').value = finaleDistance;
       };
 
@@ -91,6 +96,20 @@ $(document).ready(function () {
             }
         }
         request.send()
+    };
+
+    function eta(kts) {
+        var round = Math.round(divide);
+        var ete = round / kts;
+        var multiply = ete * 60;
+        var round = Math.round(multiply);
+        return round; 
+    };
+
+    function convertToHourMin(mins) {
+        let h = Math.floor(mins / 60);
+        let m = mins % 60;
+        document.getElementById('ete').value = `${h} hours ${m} minutes`;
     };
 
     function getLatLng(x) {

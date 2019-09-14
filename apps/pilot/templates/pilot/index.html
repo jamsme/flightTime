@@ -70,13 +70,13 @@
                             <h4 class="result">Time Difference</h4>
                             <h6>Nothing</h6>
                             <h4 class="result">Distance</h4>
-                            <h6><input type="text" readonly id="distance"></h6>
+                            <input type="text" readonly id="distance">
                             <h4 class="result">Heading</h4>
-                            <h6><input type="text" readonly id="heading"></h6>
+                            <input type="text" readonly id="heading">
                         </div>
                         <div class="col l6">
                             <h4 class="result">Flight Time</h4>
-                            <h6>Nothing</h6>
+                            <input type="text" readonly id="ete">
                             <h4 class="result">Speed</h4>
                             <h6>{{ request.session.speed }}kn</h6>
                         </div>
@@ -93,5 +93,6 @@
     var depart = "{{ request.session.depart }}";
     var arrive = "{{ request.session.arrive }}";
     var wind = "{{ request.session.wind }}";
+    var speed = "{{ request.session.speed }}";
 </script>
 </html>
