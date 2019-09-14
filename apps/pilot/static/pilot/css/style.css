@@ -68,7 +68,7 @@ h4.bold {
     color: black;
     margin: 0 0 10px 0;
 }
-input#heading, input#distance, input#ete {
+input#heading, input#distance, input#ete, input#wind {
     border: none;
     text-align: center;
     margin: 0 0 20px 0;

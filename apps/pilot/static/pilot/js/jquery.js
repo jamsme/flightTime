@@ -54,6 +54,7 @@ $(document).ready(function () {
                 } else {
                     eta(speed);
                     convertToHourMin(eta(speed));
+                    document.getElementById('wind').value = "none";
                 };
             });
         });
@@ -90,7 +91,7 @@ $(document).ready(function () {
         request.onload = function () {
             var data = JSON.parse(this.response)
             if (request.status >= 200 && request.status < 400) {
-                console.log(data);
+                document.getElementById('wind').value = `${data.wind.speed} @ ${data.wind.deg}°`;
               } else {
                 console.log('error')
             }
