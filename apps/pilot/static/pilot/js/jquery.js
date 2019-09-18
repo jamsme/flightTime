@@ -8,10 +8,13 @@ $(document).ready(function () {
     var serviceTwo
     var poly;
     var map;
+    var infowindow;
 
     window.initMap = function() {
         
         var california = new google.maps.LatLng(37.0902, -102.7129);
+
+        infowindow = new google.maps.InfoWindow();
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: california,
@@ -21,12 +24,12 @@ $(document).ready(function () {
 
         var request = {
             query: depart + "airport",
-            fields: ['geometry'],
+            fields: ['name','geometry'],
         };
 
         var requestTwo = {
             query: arrive + "airport",
-            fields: ['geometry'],
+            fields: ['name','geometry'],
         };
 
         service = new google.maps.places.PlacesService(map);
@@ -38,22 +41,32 @@ $(document).ready(function () {
                 position: result[0].geometry.location
             });
 
+            google.maps.event.addListener(marker1, 'click', function() {
+                infowindow.setContent(result[0].name);
+                infowindow.open(map, this);
+            });
+
             serviceTwo.findPlaceFromQuery(requestTwo, function (results) {
                 marker2 = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
 
+                google.maps.event.addListener(marker2, 'click', function() {
+                    infowindow.setContent(results[0].name);
+                    infowindow.open(map, this);
+                });
+
                 var bounds = new google.maps.LatLngBounds(
                     marker1.position, marker2.position);
-                    map.fitBounds(bounds);
+                    map.fitBounds(bounds);    
 
                 update();
                 if (wind == "yes") {
                     getWeather(getLatLng(marker1)[0], getLatLng(marker1)[1]);
                 } else {
-                    eta(speed);
-                    convertToHourMin(eta(speed));
+                    ete(speed);
+                    convertToHourMin(ete(speed));
                     document.getElementById('wind').value = "none";
                 };
             });
@@ -75,7 +88,6 @@ $(document).ready(function () {
         var heading = google.maps.geometry.spherical.computeHeading(path[0], path[1]);
         if (heading < 0) {
             heading = heading + 360;
-            heading
         }
         finaleHeading = Math.round(heading) + "°";
         document.getElementById('heading').value = finaleHeading;
@@ -83,7 +95,7 @@ $(document).ready(function () {
         divide = d / 1852;
         var finaleDistance = Math.round(divide) + "nm";
         document.getElementById('distance').value = finaleDistance;
-      };
+    }; 
 
     function getWeather(x,y) {
         var request = new XMLHttpRequest()
@@ -99,7 +111,7 @@ $(document).ready(function () {
         request.send()
     };
 
-    function eta(kts) {
+    function ete(kts) {
         var round = Math.round(divide);
         var ete = round / kts;
         var multiply = ete * 60;
