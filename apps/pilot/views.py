@@ -7,7 +7,6 @@ def index(request):
         print(request.session['speed'])
         print(request.session['depart'])
         print(request.session['arrive'])
-        
     return render(request, "pilot/index.html")
 
 def calculate(request):
