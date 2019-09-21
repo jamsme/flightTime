@@ -62,7 +62,7 @@
         </div>
         <div class="col l6 card-panel indigo lighten-4">
             <div id="tall">
-                {% if "wind" and "speed" and "arrive" and "depart" in request.session %}
+                {% if "arrive" and "depart" in request.session %}
                     <h4 class="bold">{{ request.session.depart }} <i class="material-icons prefix">forward</i> {{ request.session.arrive }}</h4>
                     <hr>
                     <div class="row">
@@ -81,6 +81,27 @@
                             <h6>{{ request.session.speed }}kn</h6>
                             <h4 class="result">Wind</h4>
                             <input type="text" readonly id="wind">
+                        </div>
+                    </div>
+                {% else %}
+                    <h4 class="bold"><i class="material-icons prefix">forward</i></h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col l6">
+                            <h4 class="result">Time Difference</h4>
+                            <h6>Nothing</h6>
+                            <h4 class="result">Distance</h4>
+                            <h6>none</h6>
+                            <h4 class="result">Heading</h4>
+                            <h6>none</h6>
+                        </div>
+                        <div class="col l6">
+                            <h4 class="result">ETE</h4>
+                            <h6>none</h6>
+                            <h4 class="result">Speed</h4>
+                            <h6>{{ request.session.speed }}kn</h6>
+                            <h4 class="result">Wind</h4>
+                            <h6>none</h6>
                         </div>
                     </div>
                 {% endif %}

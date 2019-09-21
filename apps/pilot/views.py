@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+import requests
+import json
 
 def index(request):
-    if "wind" and "speed" and "arrive" and "depart" in request.session: 
-        print(request.session['wind'])
-        print(request.session['speed'])
-        print(request.session['depart'])
-        print(request.session['arrive'])
+    if "wind" and "speed" and "arrive" and "depart" in request.session:
+        print("in session")
     return render(request, "pilot/index.html")
 
 def calculate(request):
