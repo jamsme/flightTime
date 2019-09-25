@@ -76,6 +76,8 @@ $(document).ready(function () {
                     update();
     
                     if (wind == "yes") {
+                        ete(speed);
+                        convertToHourMin(ete(speed));
                         getWeather(getLatLng(marker1)[0], getLatLng(marker1)[1]);
                     } else {
                         ete(speed);
@@ -95,7 +97,7 @@ $(document).ready(function () {
     
         initMap();
     
-        var divide = Number; // Globally scoping "x"
+        var divide = Number; // Globally scoping
     
         function update() {
             var path = [marker1.getPosition(), marker2.getPosition()];

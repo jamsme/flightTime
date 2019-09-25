@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-import requests
+import urllib.request
 import json
 
 def index(request):
     if "wind" and "speed" and "arrive" and "depart" in request.session:
-        print("in session")
-    return render(request, "pilot/index.html")
+        depart = request.session["depart"]
+        arrive = request.session["arrive"]
+        airportAPI(depart,arrive,request)
+        print(getAndConvertTime(request), " !!!TIME!!!")
+        
+        content = {
+            'time' : getAndConvertTime(request)
+        }
+
+    return render(request, "pilot/index.html", content)
 
 def calculate(request):
     p = request.POST
@@ -37,3 +45,51 @@ def calculate(request):
             request.session["arrive"] = arrives
             
             return redirect("/")
+            
+def airportAPI(x,y,request):
+    api = "https://api.flightstats.com/flex/airports/rest/v1/json/iata/" + x + "?appId=e871ef2e&appKey=61e5d830c67f1fc35aa35e98d4be195e"
+    webURL = urllib.request.urlopen(api)
+    data = webURL.read()
+    jsonObject = (json.loads(data.decode('utf-8')))
+    # print(json.dumps(jsonObject, indent=4, sort_keys=True))
+
+    departTime = jsonObject['airports'][0]['localTime']
+
+    apiArrive = "https://api.flightstats.com/flex/airports/rest/v1/json/iata/" + y + "?appId=e871ef2e&appKey=61e5d830c67f1fc35aa35e98d4be195e"
+    webURLArrive = urllib.request.urlopen(apiArrive)
+    dataArrive = webURLArrive.read()
+    jsonObjectArrive = (json.loads(dataArrive.decode('utf-8')))
+    # print(json.dumps(jsonObjectArrive, indent=4, sort_keys=True))
+
+    arriveTime = jsonObjectArrive['airports'][0]['localTime']
+
+    return departTime,arriveTime
+
+def getAndConvertTime(request):
+    depart = request.session["depart"]
+    arrive = request.session["arrive"]
+    time = airportAPI(depart,arrive,request)
+
+    split = time[0].split('T')
+    remove = split[1].replace(":","")
+    wholeNum = remove[:4]
+    if int(wholeNum) > 1300:
+        wholeNum = int(wholeNum) - 1200
+        departTime = str(wholeNum)
+        departTime = departTime[:2] + ":" + departTime[2:]
+    else:
+        departTime = str(wholeNum)
+        departTime = departTime[:2] + ":" + departTime[2:]
+
+    splitTwo = time[1].split('T')
+    removeTwo = splitTwo[1].replace(":","")
+    wholeNumTwo = removeTwo[:4]
+    if int(wholeNumTwo) > 1300:
+        wholeNumTwo = int(wholeNumTwo) - 1200
+        arriveTime = str(wholeNumTwo)
+        arriveTime = arriveTime[:2] + ":" + arriveTime[2:]
+    else:
+        arriveTime = str(wholeNumTwo)
+        arriveTime = arriveTime[:2] + ":" + arriveTime[2:]
+
+    return departTime,arriveTime
