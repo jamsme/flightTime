@@ -8,11 +8,14 @@ def index(request):
         depart = request.session["depart"]
         arrive = request.session["arrive"]
         airportAPI(depart,arrive,request)
-        print(getAndConvertTime(request), " !!!TIME!!!")
+        print(airportAPI(depart,arrive,request))
         
         content = {
-            'time' : getAndConvertTime(request)
+            'departTime' : getAndConvertTime(request)[0],
+            'arriveTime' : getAndConvertTime(request)[1]
         }
+
+        print(content)
 
     return render(request, "pilot/index.html", content)
 
@@ -76,10 +79,16 @@ def getAndConvertTime(request):
     if int(wholeNum) > 1300:
         wholeNum = int(wholeNum) - 1200
         departTime = str(wholeNum)
-        departTime = departTime[:2] + ":" + departTime[2:]
+        if len(departTime) <= 3:
+            departTime = departTime[:1] + ":" + departTime[1:] + "pm"
+        else:
+            departTime = departTime[:2] + ":" + departTime[2:] + "pm"
     else:
         departTime = str(wholeNum)
-        departTime = departTime[:2] + ":" + departTime[2:]
+        if len(departTime) <= 3:
+            departTime = departTime[:1] + ":" + departTime[1:] + "am"
+        else:
+            departTime = departTime[:2] + ":" + departTime[2:] + "am"
 
     splitTwo = time[1].split('T')
     removeTwo = splitTwo[1].replace(":","")
@@ -87,9 +96,14 @@ def getAndConvertTime(request):
     if int(wholeNumTwo) > 1300:
         wholeNumTwo = int(wholeNumTwo) - 1200
         arriveTime = str(wholeNumTwo)
-        arriveTime = arriveTime[:2] + ":" + arriveTime[2:]
+        if len(arriveTime) <= 3:
+            arriveTime = arriveTime[:1] + ":" + arriveTime[1:] + "pm"
+        else:
+            arriveTime = arriveTime[:2] + ":" + arriveTime[2:] + "pm"
     else:
         arriveTime = str(wholeNumTwo)
-        arriveTime = arriveTime[:2] + ":" + arriveTime[2:]
-
+        if len(arriveTime) <= 3:
+            arriveTime = arriveTime[:1] + ":" + arriveTime[1:] + "am"
+        else:
+            arriveTime = arriveTime[:2] + ":" + arriveTime[2:] + "am"
     return departTime,arriveTime
