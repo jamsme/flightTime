@@ -68,6 +68,12 @@ h4.bold {
     color: black;
     margin: 0 0 10px 0;
 }
+h4.time {
+    font-weight: 500;
+    font-size: 25px;
+    color: black;
+    margin: 0;
+}
 input#heading, input#distance, input#ete, input#wind {
     border: none;
     text-align: center;
