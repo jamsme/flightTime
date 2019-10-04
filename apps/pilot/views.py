@@ -8,16 +8,15 @@ def index(request):
         depart = request.session["depart"]
         arrive = request.session["arrive"]
         airportAPI(depart,arrive,request)
-        print(airportAPI(depart,arrive,request))
-        
+
         content = {
             'departTime' : getAndConvertTime(request)[0],
             'arriveTime' : getAndConvertTime(request)[1]
         }
-
-        print(content)
-
-    return render(request, "pilot/index.html", content)
+        
+        return render(request, "pilot/index.html", content)
+    
+    return render(request, "pilot/index.html")
 
 def calculate(request):
     p = request.POST
@@ -106,4 +105,5 @@ def getAndConvertTime(request):
             arriveTime = arriveTime[:1] + ":" + arriveTime[1:] + "am"
         else:
             arriveTime = arriveTime[:2] + ":" + arriveTime[2:] + "am"
+            
     return departTime,arriveTime

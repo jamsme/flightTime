@@ -64,7 +64,11 @@
             <div id="tall">
                 {% if "arrive" and "depart" in request.session %}
                     <h4 class="bold">{{ request.session.depart }} <i class="material-icons prefix">forward</i> {{ request.session.arrive }}</h4>
-                    <h4 class="time">{{ departTime }} - {{ arriveTime }}</h4>
+                    {% if departTime == arriveTime  %}
+
+                    {% else %}
+                        <h4 class="time">{{ departTime }} - {{ arriveTime }}</h4>
+                    {% endif %}
                     <hr>
                     <div class="row">
                         <div class="col l6">
